@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Files";
+}
+@model GitHubCms.Models.RepositoryViewModel
+
+<div class="well">
+    <h3>File available for edit from <b>@Model.RepoName</b> repository on GitHub
+    </h3>
+    <div class="help-block">In this POC, all files are listed here. Final build would either have a Table of Content or breadcrumbs to find files with search functionality</div>
+    @if (Model.Referrer == "save_success")
+    {
+        <div class="alert alert-success">
+            Content saved successfully with commit = <a href="https://github.com/ktundwal/github_cms_test_project/commit/@Model.Reason">@Model.Reason</a> by @Model.User. You can verify it on GitHub diff page 
+            <a href="https://github.com/ktundwal/github_cms_test_project/commit/@Model.Reason">here</a>
+        </div>
+    }
+    @if (Model.Referrer == "not_authorized")
+    {
+        <div class="alert alert-danger">
+            @Model.Reason
+        </div>
+    }
+    @if (Model.Referrer == "save_fail")
+    {
+        <div class="alert alert-danger">
+            Error saving your edits. Internal error @Model.Reason
+        </div>
+    }
+    @*@if (Model.Referrer == "edit")
+    {
+        <div class="alert alert-warning">You must be a contributor for <a href="https://github.com/ktundwal/github_cms_test_project">this</a> repository.
+            Please send a request to repository owner "ktundwal" by clicking <a href="https://github.com/ktundwal/github_cms_test_project/graphs/contributors">here</a> before editing following files
+        </div>    
+    }*@
+    @foreach (var file in Model.RepositoryFiles)
+    {
+
+        <form action="/Repository/Save" method="post">
+            <label for="fileContent" id="fileName" name="fileName">
+                <h2>@file.Name:</h2></label> <a class="btn btn-default" href="@file.GitHubUrl">View on GitHub</a>
+            <textarea class="form-control" rows="10" style="min-width: 100%" id="fileContent" name="fileContent">@file.Content</textarea>
+            <br/>
+            <button type="submit" class="btn btn-default btn-toolbar">Save (will commit to master)</button>
+            <button type="submit" class="btn btn-default btn-toolbar disabled">Create pull request (not implemented)</button>
+            <button type="submit" class="btn btn-default btn-toolbar disabled">Fork (not implemented)</button>
+        </form>
+    }
+    <p class="lead"></p>
+</div>

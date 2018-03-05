@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Repositories";
+}
+@model GitHubCms.Models.IndexViewModel
+
+<div class="well">
+    <h3>Available GitHub repositories</h3>
+    <div class ="container" style="width: 100%">
+        @foreach (var repository in Model.Repositories)
+        {
+            <div class="row ">
+                <h2>@repository.FullName</h2>
+                <a class="btn btn-default" href="/repository?id=@repository.Id&name=@repository.Name">Edit</a>
+                <a class="btn btn-default" href="@repository.HtmlUrl">View on GitHub</a>
+            </div>
+        }
+    </div>
+    <p class="lead"></p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>GitHub CMS</h2>
+        <p>
+            Github CMS is a proof of concept. Its purpose is to explore Github authentication model and APIs that allows to create and submit pull requests on user's behalf.
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h2>How does this work</h2>
+        <p>This is a Azure WebApp that uses OctoKit.Net to interact with GitHub</p>
+        <p><a class="btn btn-default" href="https://github.com/octokit/octokit.net">Learn more &raquo;</a></p>
+    </div>
+</div>
