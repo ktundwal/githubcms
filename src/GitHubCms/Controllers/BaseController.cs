@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using GitHubCms.Helpers;
 using Octokit;
 
 namespace GitHubCms.Controllers
 {
 	public class BaseController : Controller
 	{
-		// secrets from https://github.com/settings/applications/549481
-		private static readonly string ClientId = ConfigurationManager.AppSettings["ClientId"];
-		private static readonly string ClientSecret = ConfigurationManager.AppSettings["ClientSecret"];
-		private static readonly string DeployedEndpoint = ConfigurationManager.AppSettings["deployedEndpoint"];
-		protected static readonly string RepoForTesting = ConfigurationManager.AppSettings["RepoForTest"];
-		protected static readonly string RepoForTestingOwner = ConfigurationManager.AppSettings["OwnerOfRepoForTest"];
-		private static readonly string GitHubAppName = ConfigurationManager.AppSettings["GitHubAppName"];
+		private static readonly string ClientId = StartupHelpers.ReadConfig("ClientId");
+		private static readonly string ClientSecret = StartupHelpers.ReadConfig("ClientSecret");
+		private static readonly string DeployedEndpoint = StartupHelpers.ReadConfig("deployedEndpoint");
+		protected static readonly string RepoForTesting = StartupHelpers.ReadConfig("RepoForTest");
+		protected static readonly string RepoForTestingOwner = StartupHelpers.ReadConfig("OwnerOfRepoForTest");
+		private static readonly string GitHubAppName = StartupHelpers.ReadConfig("GitHubAppName");
 
 		protected readonly GitHubClient Client =
 			new GitHubClient(new ProductHeaderValue(GitHubAppName), GitHubClient.GitHubApiUrl);

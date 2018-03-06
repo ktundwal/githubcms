@@ -4,7 +4,12 @@ namespace GitHubCms.Models
 {
 	public class RepositoryViewModel
 	{
-		public RepositoryViewModel(long repoId, string repoName, IEnumerable<RepositoryFileViewModel> repositoryFiles, string referrer, string reason, string user)
+		public RepositoryViewModel(long repoId,
+			string repoName,
+			IEnumerable<RepositoryFileViewModel> repositoryFiles,
+			string referrer,
+			string reason,
+			string user)
 		{
 			RepoId = repoId;
 			RepoName = repoName;
@@ -16,7 +21,7 @@ namespace GitHubCms.Models
 
 		public RepositoryViewModel()
 		{
-			
+
 		}
 
 		public string RepoName { get; set; }
@@ -25,24 +30,5 @@ namespace GitHubCms.Models
 		public string User { get; set; }
 		public long RepoId { get; set; }
 		public IEnumerable<RepositoryFileViewModel> RepositoryFiles { get; set; }
-	}
-
-	public class RepositoryFileViewModel
-	{
-		public string Name { get; set; }
-		public string Content { get; set; }
-		public string GitHubUrl { get; set; }
-
-		public RepositoryFileViewModel()
-		{
-			
-		}
-
-		public RepositoryFileViewModel(string name, string content, string gitHubUrl)
-		{
-			Name = name;
-			Content = content;
-			GitHubUrl = gitHubUrl;
-		}
 	}
 }
