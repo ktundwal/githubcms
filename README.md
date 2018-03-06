@@ -18,7 +18,7 @@ User shown Readme.md file from public repo above.
 2.	Error handling: If there is an error while committing, show user the error message
 3.	This all code is written using ASP.NET controller framework. 
 
-### What’s not in this POC
+## What’s not in this POC
 1.	Workflow where user have a choice to create a pull request or fork instead of committing directly to master. I haven’t explored API's 
 2.	Ability to log user out and/or handling token expiry
 3.	Ability to show history of file commits
